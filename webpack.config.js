@@ -1,12 +1,15 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-    entry: './src/app.js',
+    entry: {
+        app: './src/app.js'
+    },    
     output: {
-        path: __dirname + 'build',
-        filename: 'bundle.js'
+        filename: 'bundle.js',
+        path: __dirname + '/build'
     },
-    devSever: {
+    
+    devServer: {
         port: 5000
     },
     module: {
@@ -14,15 +17,15 @@ module.exports = {
             {
                 test: /\.css$/,
                 use: [
-                    {loader: "style-loader"},
-                    {loader: "css-loader"}
+                    { loader: 'style-loader', options: { attributes: { id: 'id' } } },
+                    { loader: 'css-loader' }
                 ]
             }
         ]
     },
-    plugin: [
+    plugins: [
         new HtmlWebpackPlugin({
-           template: './src.index.html' 
+           template: './src/index.html' 
         })
     ]
 }
